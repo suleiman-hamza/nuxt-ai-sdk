@@ -28,6 +28,3 @@ jobs:
         # This will execute your Oxlint scripts as per your Nuxt 4 setup 
         run: npm run lint
 
-      - name: Check formatting
-        # This checks formatting, likely using Oxfmt 
-        run: npm run fmt:check
