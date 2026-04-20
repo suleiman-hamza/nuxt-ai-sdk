@@ -29,6 +29,7 @@
     "@types/node": "^22.13.11",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.60.0",
+    "oxlint-tsgolint": "^0.21.1",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.2.7"
   }
