@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+
+permissions: {}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        # 'npm ci' is the correct command for automated environments
+        run: npm ci
+
+      - name: Run lint
+        # This will execute your Oxlint scripts as per your Nuxt 4 setup 
+        run: npm run lint
+
+      - name: Check formatting
+        # This checks formatting, likely using Oxfmt 
+        run: npm run fmt:check
