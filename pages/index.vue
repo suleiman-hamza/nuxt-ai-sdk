@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue';
-import { computed } from 'vue';
+// import { useChat } from '@ai-sdk/vue';
+// import { computed } from 'vue';
 
-const { error, input, status, handleSubmit, messages, reload, stop } = useChat({
-  onFinish(messages, { usage, finishReason }) {
-    console.log('Usage', usage);
-    console.log('FinishReason', finishReason);
-  },
-});
+// const { error, input, status, handleSubmit, messages, reload, stop } = useChat({
+//   onFinish(messages, { usage, finishReason }) {
+//     console.log('Usage', usage);
+//     console.log('FinishReason', finishReason);
+//   },
+// });
 
-const disabled = computed(() => status.value !== 'ready');
+// const disabled = computed(() => status.value !== 'ready');
 </script>
 
 <template>
-  <div class="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+  <!-- <div class="flex flex-col w-full max-w-md py-24 mx-auto stretch">
     <div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
       {{ m.role === 'user' ? 'User: ' : 'AI: ' }}
       {{ m.content }}
@@ -52,5 +52,6 @@ const disabled = computed(() => status.value !== 'ready');
         :disabled="disabled"
       />
     </form>
-  </div>
+  </div> -->
+  <p class="text-indigo-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ut autem nam exercitationem eius nisi cupiditate sequi aut deleniti enim! Ea autem officiis et dolorum. Pariatur deleniti libero omnis dolore.</p>
 </template>
