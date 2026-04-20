@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
   },
+  modules: ["@nuxt/ui"],
   css: ["assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],

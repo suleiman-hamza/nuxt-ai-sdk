@@ -14,7 +14,7 @@
 
 <template>
   <main>
-    <h1>Welcome to the App</h1>
+    <h1 class="text-2xl">Welcome to the App</h1>
     <p>This is a simple Nuxt 4 app.</p>
     <span>
       <a href="#">Local Repo Link</a>

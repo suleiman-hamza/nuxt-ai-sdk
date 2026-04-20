@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --ui-container: var(--container-3xl);
+  --ui-primary: black;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-bg-accented) transparent;
+}
+
+.dark {
+  --ui-bg: #020202;
+  --ui-primary: white;
+}
