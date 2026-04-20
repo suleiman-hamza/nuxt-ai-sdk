@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
+    aiGatewayApiKey: process.env.NUXT_AI_GATEWAY_API_KEY,
   },
   modules: ["@nuxt/ui"],
   css: ["assets/css/main.css"],

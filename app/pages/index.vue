@@ -1,23 +1,28 @@
 <script setup lang="ts">
-// import { useChat } from '@ai-sdk/vue';
-// import { computed } from 'vue';
+import { Chat } from "@ai-sdk/vue";
+import { ref } from "vue";
 
-// const { error, input, status, handleSubmit, messages, reload, stop } = useChat({
-//   onFinish(messages, { usage, finishReason }) {
-//     console.log('Usage', usage);
-//     console.log('FinishReason', finishReason);
-//   },
-// });
+const input = ref("");
+const chat = new Chat({});
 
-// const disabled = computed(() => status.value !== 'ready');
+const handleSubmit = (e: Event) => {
+  e.preventDefault();
+  chat.sendMessage({ text: input.value });
+  input.value = "";
+};
 </script>
 
 <template>
-  <main>
-    <h1 class="text-2xl">Welcome to the App</h1>
-    <p>This is a simple Nuxt 4 app.</p>
-    <span>
-      <a href="#">Local Repo Link</a>
-    </span>
-  </main>
+  <div>
+    <div v-for="(m, index) in chat.messages" :key="m.id ? m.id : index">
+      {{ m.role === "user" ? "User: " : "AI: " }}
+      <div v-for="(part, index) in m.parts" :key="`${m.id}-${part.type}-${index}`">
+        <div v-if="part.type === 'text'">{{ part.text }}</div>
+      </div>
+    </div>
+
+    <form @submit="handleSubmit">
+      <input v-model="input" placeholder="Say something..." />
+    </form>
+  </div>
 </template>
