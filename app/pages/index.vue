@@ -53,5 +53,9 @@
       />
     </form>
   </div> -->
-  <p class="text-indigo-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ut autem nam exercitationem eius nisi cupiditate sequi aut deleniti enim! Ea autem officiis et dolorum. Pariatur deleniti libero omnis dolore.</p>
+  <p class="text-indigo-300">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ut autem nam exercitationem eius
+    nisi cupiditate sequi aut deleniti enim! Ea autem officiis et dolorum. Pariatur deleniti libero
+    omnis dolore.
+  </p>
 </template>

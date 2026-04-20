@@ -1,5 +1,5 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (_event) => {
   return {
-    message: 'Hello from the chat API!'
-  }
-})
+    message: "Hello from the chat API!",
+  };
+});
