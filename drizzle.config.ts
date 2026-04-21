@@ -1,11 +1,12 @@
 import { defineConfig } from "drizzle-kit";
-const config = useRuntimeConfig();
+import type { Config } from "drizzle-kit";
+// import process from "node:process";
 
 export default defineConfig({
   dialect: "postgresql",
   schema: "./server/database/schema.ts",
   out: "./server/database/migrations",
   dbCredentials: {
-    url: config.databaseUrl,
+    url: process.env.DATABASE_URL!,
   },
-});
+}) satisfies Config;
