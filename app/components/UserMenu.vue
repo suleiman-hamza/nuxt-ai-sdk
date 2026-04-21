@@ -43,19 +43,14 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
         }
     }]
 }], [{
-    label: 'Documentation',
-    icon: 'i-lucide-book-open',
-    to: 'https://ui.nuxt.com/getting-started/installation/pro/nuxt',
-    target: '_blank'
-}, {
     label: 'GitHub repository',
     icon: 'i-simple-icons-github',
-    to: 'https://github.com/hugorcd/nuxt-ui-chat',
+    to: 'https://github.com/suleiman-hamza/nuxt-ai-sdk',
     target: '_blank'
 }, {
-    label: 'Upgrade to Pro',
+    label: 'My Portfolio',
     icon: 'i-lucide-rocket',
-    to: 'https://ui.nuxt.com/pro/purchase',
+    to: 'https://shshunt.vercel.app/',
     target: '_blank'
 }], [{
     label: 'Log out',
@@ -74,9 +69,9 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
             label: collapsed ? undefined : (user?.name || user?.username),
             trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down'
         }" :avatar="{
-        src: user?.avatar || undefined,
-        alt: user?.name || user?.username
-    }" color="neutral" variant="ghost" size="md" :square="collapsed" class="data-[state=open]:bg-elevated" :ui="{
+            src: user?.avatar || undefined,
+            alt: user?.name || user?.username
+        }" color="neutral" variant="ghost" size="md" :square="collapsed" class="data-[state=open]:bg-elevated" :ui="{
         trailingIcon: 'text-dimmed'
     }" />
     </UDropdownMenu>
