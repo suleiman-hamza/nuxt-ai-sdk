@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
     aiGatewayApiKey: process.env.NUXT_AI_GATEWAY_API_KEY,
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
+    databaseUrl: process.env.DATABASE_URL,
     oauth: {
       // provider in lowercase (github, google, etc.)
       github: {
