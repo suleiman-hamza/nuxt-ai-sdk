@@ -1,20 +1,94 @@
 <script setup lang="ts">
-import { Chat } from "@ai-sdk/vue";
-import { ref } from "vue";
+const input = ref('')
+const loading = ref(false)
 
-const input = ref("");
-const chat = new Chat({});
+const { model } = useLLM()
+const { loggedIn } = useUserSession()
+const { isRateLimited } = useRateLimit()
 
-const handleSubmit = (e: Event) => {
-  e.preventDefault();
-  chat.sendMessage({ text: input.value });
-  input.value = "";
-};
+const canUseModel = computed(() => {
+  return !model.value.reasoning || (model.value.reasoning && loggedIn.value)
+})
+
+async function createChat(prompt: string) {
+  input.value = prompt
+  loading.value = true
+  const chat = await $fetch('/api/chats', {
+    method: 'POST',
+    body: { input: prompt }
+  })
+  if (!chat) {
+    const toast = useToast()
+    toast.add({
+      title: 'Failed to create chat',
+      description: 'Please try again later',
+      color: 'error'
+    })
+    loading.value = false
+    return
+  }
+
+  refreshNuxtData('chats')
+  navigateTo(`/chat/${chat.id}`)
+}
+
+function onSubmit() {
+  createChat(input.value)
+}
+
+const quickChats = [
+  {
+    label: 'What is the weather in London?',
+    icon: 'i-lucide-sun'
+  },
+  {
+    label: 'Who is Suleiman Hamza?',
+    icon: 'i-logos-nuxt-icon'
+  },
+  {
+    label: 'What is the capital of France?',
+    icon: 'i-lucide-map-pin'
+  },
+  {
+    label: 'How to change the theme of the app?',
+    icon: 'i-lucide-sun'
+  }
+]
+// };
 </script>
 
 <template>
-  <div>
-    <div v-for="(m, index) in chat.messages" :key="m.id ? m.id : index">
+  <div class="relative flex-1 flex flex-col min-w-0 min-h-svh">
+    <DashboardNavbar />
+    <UContainer class="flex-1 flex flex-col justify-center gap-4 py-8">
+      <div class="flex flex-col gap-1">
+        <span class="text-2xl sm:text-3xl text-highlighted font-medium">
+          Welcome
+        </span>
+        <span
+          class="text-3xl sm:text-4xl bg-linear-to-r from-inverted/40 to-inverted/75 to-50% bg-clip-text text-transparent font-medium">
+          How can I help you today?
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <UButton v-for="quickChat in quickChats" :key="quickChat.label" :icon="quickChat.icon" :label="quickChat.label"
+          :disabled="!canUseModel || isRateLimited" size="sm" color="neutral" variant="outline"
+          class="relative group/shimmer rounded-full" :ui="{
+            leadingIcon: 'grayscale'
+          }" @click="createChat(quickChat.label)">
+          <span class="relative z-10 transition-colors duration-300 text-muted">
+            {{ quickChat.label }}
+            <span
+              class="absolute inset-0 bg-clip-text bg-inverted text-transparent opacity-0 group-hover/shimmer:opacity-100 group-hover/shimmer:animate-shimmer-once transition-opacity duration-200"
+              style="background-image:linear-gradient(90deg, transparent calc(50% - 40px), #12A594, #E93D82, #FFB224, transparent calc(50% + 40px));background-size:200% 100%;background-position:-50% center">
+              {{ quickChat.label }}
+            </span>
+          </span>
+        </UButton>
+      </div>
+      <ChatPrompt v-model="input" mode="index" :status="loading ? 'streaming' : 'ready'" @submit="onSubmit" />
+    </UContainer>
+    <!-- <div v-for="(m, index) in chat.messages" :key="m.id ? m.id : index">
       {{ m.role === "user" ? "User: " : "AI: " }}
       <div v-for="(part, index) in m.parts" :key="`${m.id}-${part.type}-${index}`">
         <div v-if="part.type === 'text'">{{ part.text }}</div>
@@ -23,6 +97,6 @@ const handleSubmit = (e: Event) => {
 
     <form @submit="handleSubmit">
       <input v-model="input" placeholder="Say something..." />
-    </form>
+    </form> -->
   </div>
 </template>

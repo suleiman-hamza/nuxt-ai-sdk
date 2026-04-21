@@ -15,7 +15,9 @@ defineShortcuts({
   <main>
     <UApp>
       <NuxtLoadingIndicator color="var(--ui-primary)" />
-      <NuxtPage />
+      <UDashboardGroup unit="rem">
+        <NuxtPage />
+      </UDashboardGroup>
     </UApp>
   </main>
 </template>
